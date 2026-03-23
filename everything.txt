@@ -1,0 +1,21 @@
+import pyodbc
+import pandas as pd
+
+server = "YOUR_SERVER_NAME"
+database = "YOUR_DATABASE_NAME"
+username = "YOUR_USERNAME"
+password = "YOUR_PASSWORD"
+
+conn = pyodbc.connect(
+    f"DRIVER={{ODBC Driver 17 for SQL Server}};"
+    f"SERVER={server};"
+    f"DATABASE={database};"
+    f"UID={username};"
+    f"PWD={password}"
+)
+
+query = "SELECT TOP 10 * FROM your_table"
+df = pd.read_sql(query, conn)
+
+print(df)
+conn.close()
